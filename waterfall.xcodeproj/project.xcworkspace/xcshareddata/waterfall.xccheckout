@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>ACD3A7FB-A9EC-4425-AD9A-023D9F16FD39</string>
+	<key>IDESourceControlProjectName</key>
+	<string>waterfall</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C8981B1F-2AFA-481A-AA7E-4395F9BFB2BC</key>
+		<string>https://github.com/h-nishihata/waterfall</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>waterfall.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C8981B1F-2AFA-481A-AA7E-4395F9BFB2BC</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/h-nishihata/waterfall</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C8981B1F-2AFA-481A-AA7E-4395F9BFB2BC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C8981B1F-2AFA-481A-AA7E-4395F9BFB2BC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>waterfall</string>
+		</dict>
+	</array>
+</dict>
+</plist>
