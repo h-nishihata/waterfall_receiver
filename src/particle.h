@@ -1,20 +1,22 @@
-//#ifndef _OF_PARTICLE
-//#define _OF_PARTICLE
+#ifndef _OF_PARTICLE
+#define _OF_PARTICLE
 
 #include "ofMain.h"
 
 class particle{
     
-private:
+public:
+    
     int x;
     int y;
     int r;
     
-public:
     particle();
     void draw();
     void update();
+    void reset();
     
+    int a;
 };
 
-//#endif
+#endif

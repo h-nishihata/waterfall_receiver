@@ -3,15 +3,17 @@
 #pragma once
 
 #include "ofMain.h"
+
 #include "ofxLayer.h"
-
-
 #include "TestLayer1.h"
 #include "TestLayer2.h"
 #include "TestLayer3.h"
 
 #include "ofxOsc.h"
 #define PORT 8000
+
+extern string  state;
+extern string  holes;
 
 class testApp : public ofBaseApp{
     
@@ -37,8 +39,7 @@ public:
     ofxLayer::Manager mng;
     
     ofxOscReceiver receiver;
-    string state;
-    string number;
+    
 };
 
 //#endif

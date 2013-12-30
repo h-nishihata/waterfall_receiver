@@ -5,7 +5,7 @@
 unsigned int getClassID() const { return ofx::Layer::Type2Int<Klass>::value(); }
 
 #include "particle.h"
-#define NUM 10000
+#define NUM 10
 
 class TestLayer2 : public ofxLayer::Layer{
 public:
@@ -15,12 +15,10 @@ public:
     void setup();
     void update();
     void draw();
-    
-    float time;
-    bool flag;
+    int checkY();
+
     float a;
     particle p[NUM];
+    bool flag;
     
-    
-    ofVideoPlayer b;
 };
