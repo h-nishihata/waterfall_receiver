@@ -17,15 +17,18 @@ void TestLayer3::setup(){
     compositeImg.allocate(960,540);
     
 	bLearnBakground = true;
-    threshold = 180;
+    threshold = 200;
     
     for (int n=0; n<nPixels; n++) {
         r[n] = -45;
         g[n] = -40;
         b[n] = -35;
-        a[n] = -100;
     }
-
+    r_ = 0;
+    g_ = 0;
+    b_ = 0;
+    
+    state = "";
 }
 
 //--------------------------------------------------------------------------------------------------------------
@@ -72,15 +75,14 @@ void TestLayer3::update(){
     
     for (int i=0; i<nPixels; i++) {
         if (grayPixels[i] == 0) {
-            compositeImgPixels[3*i] = sampleImgPixels[3*i];
-            compositeImgPixels[3*i+1] = sampleImgPixels[3*i+1];
-            compositeImgPixels[3*i+2] = sampleImgPixels[3*i+2];
+            compositeImgPixels[3*i] = sampleImgPixels[3*i]+r_;
+            compositeImgPixels[3*i+1] = sampleImgPixels[3*i+1]+g_;
+            compositeImgPixels[3*i+2] = sampleImgPixels[3*i+2]+b_;
             
         }else{
             compositeImgPixels[3*i] = sampleImgPixels[3*i]+r[i];
             compositeImgPixels[3*i+1] = sampleImgPixels[3*i+1]+g[i];
             compositeImgPixels[3*i+2] = sampleImgPixels[3*i+2]+b[i];
-            compositeImgPixels[3*i+3] = sampleImgPixels[3*i+3]+a[i];
         }
     }
     
@@ -88,25 +90,50 @@ void TestLayer3::update(){
     
     //          ********************   INTERACTIVE METHOD   ********************
     
+
+
+    if(threshold == 200) flag_thr = true; else if(threshold == 0) flag_thr = false;
+    
+        for (int n=0; n<nPixels; n++) {
+            if(r[n] == -40)flag_r = true; else if(r[n] == 0) flag_r = false;
+            if(g[n] == -45)flag_g = true; else if(g[n] == 0)flag_g = false;
+            if(b[n] == -35)flag_b = true; else if(b[n] == 0)flag_b = false;
+        }
+        if(r_ == 0) flag_r_ = true; else if(r_ == 255)flag_r_ = false;
+        if(g_ == 0) flag_g_ = true; else if(g_ == 255)flag_g_ = false;
+        if(b_ == 0) flag_b_ = true; else if(b_ == 255)flag_b = false;
+        
+ 
     if(state == "found"){
         
-        if(threshold > 0)threshold--;
+        
+        if(flag_thr == true) threshold--; else if(flag_thr == false)threshold+=2;
+        
         for (int n=0; n<nPixels; n++) {
-            if(r[n]<0)  r[n]++;
-            if(g[n]<0)  g[n]++;
-            if(b[n]<0)  b[n]++;
+            if(flag_r == true)            r[n]++; else r[n]--;
+            if(flag_g == true)            g[n]++; else g[n]--;
+            if(flag_b == true)            b[n]++; else b[n]--;
         }
+        if(flag_r_ == true)            r_++; else r_--;
+        if(flag_g_ == true)            g_++; else g_--;
+        if(flag_b_ == true)            b_++; else b_--;
+
+
         
     }else if (state == "notFound"){
+        if(threshold < 200) threshold++;
         
-        if (threshold < 180)threshold+=0.6;
         for (int n=0; n<nPixels; n++) {
-            if(r[n]>-45)  r[n]-=0.8;
-            if(g[n]>-40)  g[n]-=0.8;
-            if(b[n]>-35)  b[n]-=0.8;
+            if(r[n] > -45)r[n]--;
+            if(g[n] > -40)g[n]--;
+            if(b[n] > -35)b[n]--;
         }
-        
+        if(r_ > 0)r_ --;
+        if(g_ > 0)g_ --;
+        if(b_ > 0)b_ --;
+
     }
+    
     
     compositeImg.setFromPixels(compositeImgPixels,960,540);
     

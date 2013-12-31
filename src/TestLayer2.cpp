@@ -19,7 +19,7 @@ void TestLayer2::draw(){
     int tempMax = p[0].y;
 
     ofBackground(0,0,0,0);
-    ofSetColor(90, 15, 15, a);
+    ofSetColor(150, 50, 50, a);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
     
     if (holes == "found") flag = true;

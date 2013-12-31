@@ -15,8 +15,7 @@ public:
     void draw();
     void update();
     void reset();
-    
-    int a;
+
 };
 
 #endif

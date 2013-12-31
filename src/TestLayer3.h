@@ -36,10 +36,20 @@ public:
     float r[960*540];
     float g[960*540];
     float b[960*540];
-    float a[960*540];
+    float r_;
+    float g_;
+    float b_;
+    
     int nPixels  = 960*540;
     
     unsigned char* compositeImgPixels = new unsigned char[nPixels*3];
-    float threshold;
+    int threshold;
     
+    bool flag_r;
+    bool flag_g;
+    bool flag_b;
+    bool flag_r_;
+    bool flag_g_;
+    bool flag_b_;
+    bool flag_thr;
 };

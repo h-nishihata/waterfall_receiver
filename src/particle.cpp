@@ -2,10 +2,9 @@
 
 particle::particle(){
     
-    x = ofRandom(550,900);
-    y = ofRandom(ofGetHeight(),ofGetHeight()*3);
-    r = ofRandom(1,15);
-    a = 20;
+    x = ofRandom(600,850);
+    y = ofRandom(ofGetHeight(),ofGetHeight()*1.2);
+    r = ofRandom(1,20);
 }
 //--------------------------------------------------------------
 void particle::update(){
@@ -14,14 +13,15 @@ void particle::update(){
     int posy = ofRandom(-20);
     x += posx;
     y += posy;
-    a-=5;
-    
+
 }
 //--------------------------------------------------------------
 void particle::draw(){
     
-    ofFill();
-    ofSetColor(255,255,255,a);
+    ofEnableAlphaBlending();
+    ofNoFill();
+    ofSetLineWidth(ofRandom(0.1,2));
+    ofSetColor(255,255,255,50);
     ofCircle(x, y, r);
     ofCircle(x+ofRandom(-5,5), y+ofRandom(-5,5), r);
     ofCircle(x+ofRandom(-5,5), y+ofRandom(-5,5), r);
