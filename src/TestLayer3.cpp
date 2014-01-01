@@ -17,7 +17,7 @@ void TestLayer3::setup(){
     compositeImg.allocate(960,540);
     
 	bLearnBakground = true;
-    threshold = 200;
+    threshold = 50;
     
     for (int n=0; n<nPixels; n++) {
         r[n] = -45;
@@ -80,9 +80,9 @@ void TestLayer3::update(){
             compositeImgPixels[3*i+2] = sampleImgPixels[3*i+2]+b_;
             
         }else{
-            compositeImgPixels[3*i] = sampleImgPixels[3*i]+r[i];
-            compositeImgPixels[3*i+1] = sampleImgPixels[3*i+1]+g[i];
-            compositeImgPixels[3*i+2] = sampleImgPixels[3*i+2]+b[i];
+            compositeImgPixels[3*i] = (sampleImgPixels[3*i]+r[i])*2;
+            compositeImgPixels[3*i+1] = (sampleImgPixels[3*i+1]+g[i])*2;
+            compositeImgPixels[3*i+2] = (sampleImgPixels[3*i+2]+b[i])*2;
         }
     }
     

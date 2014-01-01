@@ -7,6 +7,7 @@ unsigned int getClassID() const { return ofx::Layer::Type2Int<Klass>::value(); }
 
 extern bool start_mov;
 extern float time_;
+extern ofxCvGrayscaleImage grayDiff;
 
 class TestLayer3 : public ofxLayer::Layer{
 public:
@@ -26,10 +27,9 @@ public:
     
     ofxCvGrayscaleImage grayImage;
     ofxCvGrayscaleImage grayBg;
-    ofxCvGrayscaleImage grayDiff;
-    ofxCvContourFinder contourFinder;
     
     ofxCvColorImage compositeImg;
+    ofxCvContourFinder contourFinder;
     
     bool bLearnBakground;
     
@@ -41,8 +41,8 @@ public:
     float b_;
     
     int nPixels  = 960*540;
-    
     unsigned char* compositeImgPixels = new unsigned char[nPixels*3];
+
     int threshold;
     
     bool flag_r;
