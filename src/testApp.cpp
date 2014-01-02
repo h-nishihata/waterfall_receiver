@@ -7,7 +7,7 @@ void testApp::setup(){
 
     receiver.setup( PORT );
     ofSetVerticalSync(true);
-//    ofBackground(100,100,5);
+    ofBackgroundGradient(ofColor(255,80,0),ofColor(100,100,5), OF_GRADIENT_CIRCULAR);
     mng.setup(1440,900);
     
     layer1 = mng.createLayer<TestLayer1>();

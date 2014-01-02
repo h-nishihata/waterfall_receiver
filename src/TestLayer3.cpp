@@ -17,7 +17,7 @@ void TestLayer3::setup(){
     compositeImg.allocate(960,540);
     
 	bLearnBakground = true;
-    threshold = 50;
+    threshold = 200;
     
     for (int n=0; n<nPixels; n++) {
         r[n] = -45;
@@ -34,7 +34,6 @@ void TestLayer3::setup(){
 //--------------------------------------------------------------------------------------------------------------
 void TestLayer3::update(){
     
-    ofEnableAlphaBlending();
     //    if (start_mov == true) {
     vidPlayer.play();
     vidPlayer.update();
@@ -80,9 +79,18 @@ void TestLayer3::update(){
             compositeImgPixels[3*i+2] = sampleImgPixels[3*i+2]+b_;
             
         }else{
-            compositeImgPixels[3*i] = (sampleImgPixels[3*i]+r[i])*2;
-            compositeImgPixels[3*i+1] = (sampleImgPixels[3*i+1]+g[i])*2;
-            compositeImgPixels[3*i+2] = (sampleImgPixels[3*i+2]+b[i])*2;
+            if(time_ < 0.01){
+                compositeImgPixels[3*i] = (sampleImgPixels[3*i]+r[i])*1.2;
+                compositeImgPixels[3*i+1] = (sampleImgPixels[3*i+1]+g[i])*1.2;
+                compositeImgPixels[3*i+2] = (sampleImgPixels[3*i+2]+b[i])*1.2;
+            }else if (time_ >=0.1 && time_ < 0.2){
+
+                    if(compositeImgPixels[3*i] < 255)compositeImgPixels[3*i]++;
+                    if(compositeImgPixels[3*i+1] < 255)compositeImgPixels[3*i+1]++;
+                    if(compositeImgPixels[3*i+2] < 255)compositeImgPixels[3*i+2]++;
+
+            }
+            
         }
     }
     
@@ -90,20 +98,20 @@ void TestLayer3::update(){
     
     //          ********************   INTERACTIVE METHOD   ********************
     
-
-
     if(threshold == 200) flag_thr = true; else if(threshold == 0) flag_thr = false;
     
-        for (int n=0; n<nPixels; n++) {
-            if(r[n] == -40)flag_r = true; else if(r[n] == 0) flag_r = false;
-            if(g[n] == -45)flag_g = true; else if(g[n] == 0)flag_g = false;
-            if(b[n] == -35)flag_b = true; else if(b[n] == 0)flag_b = false;
-        }
-        if(r_ == 0) flag_r_ = true; else if(r_ == 255)flag_r_ = false;
-        if(g_ == 0) flag_g_ = true; else if(g_ == 255)flag_g_ = false;
-        if(b_ == 0) flag_b_ = true; else if(b_ == 255)flag_b = false;
-        
- 
+    
+    for (int n=0; n<nPixels; n++) {
+        if(r[n] == -45)flag_r = true; else if(r[n] == 255) flag_r = false;
+        if(g[n] == -40)flag_g = true; else if(g[n] == 255)flag_g = false;
+        if(b[n] == -35)flag_b = true; else if(b[n] == 255)flag_b = false;
+    }
+    
+    if(r_ == 0) flag_r_ = true; else if(r_ == 255)flag_r_ = false;
+    if(g_ == 0) flag_g_ = true; else if(g_ == 255)flag_g_ = false;
+    if(b_ == 0) flag_b_ = true; else if(b_ == 255)flag_b_ = false;
+    
+    
     if(state == "found"){
         
         
@@ -114,24 +122,25 @@ void TestLayer3::update(){
             if(flag_g == true)            g[n]++; else g[n]--;
             if(flag_b == true)            b[n]++; else b[n]--;
         }
+        
         if(flag_r_ == true)            r_++; else r_--;
         if(flag_g_ == true)            g_++; else g_--;
         if(flag_b_ == true)            b_++; else b_--;
-
-
+        
+        
         
     }else if (state == "notFound"){
         if(threshold < 200) threshold++;
         
         for (int n=0; n<nPixels; n++) {
-            if(r[n] > -45)r[n]--;
-            if(g[n] > -40)g[n]--;
-            if(b[n] > -35)b[n]--;
+            if(r[n] > -45)r[n]-=0.8;
+            if(g[n] > -40)g[n]-=0.8;
+            if(b[n] > -35)b[n]-=0.8;
         }
-        if(r_ > 0)r_ --;
-        if(g_ > 0)g_ --;
-        if(b_ > 0)b_ --;
-
+        if(r_ > 0)r_ -=0.8;
+        if(g_ > 0)g_ -=0.8;
+        if(b_ > 0)b_ -=0.8;
+        
     }
     
     
@@ -171,12 +180,11 @@ void TestLayer3::draw(){
         ofNoFill();
         ofSetLineWidth(ofRandom(1,5));
         ofSetColor(red,green,blue);
-        ofCircle(2*centerX[n],2*centerY[n],30*(red+green+blue)/765);
-        ofCircle(2*centerX[n]+ofRandom(-5,5),2*centerY[n]+ofRandom(-5,5),30*(red+green+blue)/765);
-        ofCircle(2*centerX[n]+ofRandom(-5,5),2*centerY[n]+ofRandom(-5,5),30*(red+green+blue)/765);
-        ofCircle(2*centerX[n]+ofRandom(-5,5),2*centerY[n]+ofRandom(-5,5),30*(red+green+blue)/765);
+        ofCircle(centerX[n],centerY[n],30*(red+green+blue)/765);
+        ofCircle(centerX[n]+ofRandom(-5,5),centerY[n]+ofRandom(-5,5),30*(red+green+blue)/765);
+        ofCircle(centerX[n]+ofRandom(-5,5),centerY[n]+ofRandom(-5,5),30*(red+green+blue)/765);
+        ofCircle(centerX[n]+ofRandom(-5,5),centerY[n]+ofRandom(-5,5),30*(red+green+blue)/765);
     }
-    
 }
 
 
