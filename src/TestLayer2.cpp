@@ -19,7 +19,7 @@ void TestLayer2::draw(){
     
     int tempMax = p[0].y;
     
-    if (holes == "found") flag = true;
+    if (holes == "found"){ flag = true; }
     if (flag == true) {
         for (int i=0; i<NUM; i++) {
             p[i].update();
@@ -27,7 +27,7 @@ void TestLayer2::draw(){
             if(p[i].y > tempMax) tempMax = p[i].y;
         }
         
-        if (tempMax <= -500) {
+        if (tempMax <= 0) {
             flag = false;
             for (int i=0; i<NUM; i++) {
                 p[i].reset();
@@ -36,8 +36,6 @@ void TestLayer2::draw(){
             }
         }
     }
-    
-    
     
     //    //　　暗転
     //    if (time_ < 0.01) {

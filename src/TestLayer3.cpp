@@ -17,7 +17,7 @@ void TestLayer3::setup(){
     compositeImg.allocate(960,540);
     
 	bLearnBakground = true;
-    threshold = 200;
+    threshold = 225;
     
     for (int n=0; n<nPixels; n++) {
         r[n] = -45;
@@ -83,7 +83,7 @@ void TestLayer3::update(){
                 compositeImgPixels[3*i] = (sampleImgPixels[3*i]+r[i])*1.2;
                 compositeImgPixels[3*i+1] = (sampleImgPixels[3*i+1]+g[i])*1.2;
                 compositeImgPixels[3*i+2] = (sampleImgPixels[3*i+2]+b[i])*1.2;
-            }else if (time_ >=0.1 && time_ < 0.2){
+            }else if (time_ >=0.1){
 
                     if(compositeImgPixels[3*i] < 255)compositeImgPixels[3*i]++;
                     if(compositeImgPixels[3*i+1] < 255)compositeImgPixels[3*i+1]++;
@@ -98,7 +98,7 @@ void TestLayer3::update(){
     
     //          ********************   INTERACTIVE METHOD   ********************
     
-    if(threshold == 200) flag_thr = true; else if(threshold == 0) flag_thr = false;
+    if(threshold == 225) flag_thr = true; else if(threshold == 0) flag_thr = false;
     
     
     for (int n=0; n<nPixels; n++) {
@@ -130,7 +130,7 @@ void TestLayer3::update(){
         
         
     }else if (state == "notFound"){
-        if(threshold < 200) threshold++;
+        if(threshold < 225) threshold++;
         
         for (int n=0; n<nPixels; n++) {
             if(r[n] > -45)r[n]-=0.8;

@@ -25,8 +25,6 @@ void particle::update(){
 void particle::draw(){
     
     ofEnableAlphaBlending();
-//    ofNoFill();
-//    ofSetLineWidth(ofRandom(0.1,2));
     ofSetColor(255,255,255,255);
     ofCircle(x, y, r);
     ofSetColor(255,255,255,100);
