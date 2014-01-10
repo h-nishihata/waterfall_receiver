@@ -12,8 +12,6 @@ void TestLayer1::draw(){
     ofBackground(0,0,0,0);
     
     ofSetColor(0, 0, 0);
-    ofRect(0, 0, 585, 900);
-    ofRect(855, 0, 800, 900);
-    ofRect(0,900,1500,450);
+    ofRect(0, ofGetHeight()/2, 1920, 540);
 
 }

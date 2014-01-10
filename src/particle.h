@@ -12,7 +12,6 @@ public:
     int r;
     
     particle();
-    void setup();
     void update();
     void draw();
     void reset();

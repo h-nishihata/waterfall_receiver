@@ -6,7 +6,6 @@
 unsigned int getClassID() const { return ofx::Layer::Type2Int<Klass>::value(); }
 
 extern bool start_mov;
-extern float time_;
 
 class TestLayer3 : public ofxLayer::Layer{
 public:
@@ -16,7 +15,6 @@ public:
     void setup();
     void update();
     void draw();
-    void keyPressed(int key);
     
     ofVideoPlayer vidPlayer;
     
@@ -32,25 +30,29 @@ public:
     ofxCvContourFinder contourFinder;
     
     bool bLearnBakground;
+    int threshold;
+    float time_;
+
+    int nPixels  = 960*540;
+    unsigned char* compositeImgPixels = new unsigned char[nPixels*3];
     
     float r[960*540];
     float g[960*540];
     float b[960*540];
-    float r_;
-    float g_;
-    float b_;
-    
-    int nPixels  = 960*540;
-    unsigned char* compositeImgPixels = new unsigned char[nPixels*3];
-
-    int threshold;
+//    float r_;
+//    float g_;
+//    float b_;
     
     bool flag_r;
     bool flag_g;
     bool flag_b;
-    bool flag_r_;
-    bool flag_g_;
-    bool flag_b_;
+//    bool flag_r_;
+//    bool flag_g_;
+//    bool flag_b_;
     bool flag_thr;
-    bool flag_wht;
+    
+    unsigned char red;
+    unsigned char green;
+    unsigned char blue;
+    
 };

@@ -1,12 +1,11 @@
 #include "TestLayer3.h"
-
 string state;
+
 //--------------------------------------------------------------------------------------------------------------
 void TestLayer3::setup(){
     
-    ofSetFrameRate(30);
-    
-    vidPlayer.loadMovie("kegonfalls_07.mp4");
+    ofSetFrameRate(60);
+    vidPlayer.loadMovie("kegonfalls_2.mp4");
     
     colorImg.allocate(960,540);
     colorImgHSV.allocate(960,540);
@@ -24,11 +23,12 @@ void TestLayer3::setup(){
         g[n] = -40;
         b[n] = -35;
     }
-    r_ = 0;
-    g_ = 0;
-    b_ = 0;
+//    r_ = 0;
+//    g_ = 0;
+//    b_ = 0;
     
     state = "";
+    
 }
 
 //--------------------------------------------------------------------------------------------------------------
@@ -74,21 +74,21 @@ void TestLayer3::update(){
     
     for (int i=0; i<nPixels; i++) {
         if (grayPixels[i] == 0) {
-            compositeImgPixels[3*i] = sampleImgPixels[3*i]+r_;
-            compositeImgPixels[3*i+1] = sampleImgPixels[3*i+1]+g_;
-            compositeImgPixels[3*i+2] = sampleImgPixels[3*i+2]+b_;
+            compositeImgPixels[3*i] = sampleImgPixels[3*i];
+            compositeImgPixels[3*i+1] = sampleImgPixels[3*i+1];
+            compositeImgPixels[3*i+2] = sampleImgPixels[3*i+2];
             
         }else{
-            if(time_ < 0.01){
-                compositeImgPixels[3*i] = (sampleImgPixels[3*i]+r[i])*1.2;
-                compositeImgPixels[3*i+1] = (sampleImgPixels[3*i+1]+g[i])*1.2;
-                compositeImgPixels[3*i+2] = (sampleImgPixels[3*i+2]+b[i])*1.2;
-            }else if (time_ >=0.1){
-
-                    if(compositeImgPixels[3*i] < 255)compositeImgPixels[3*i]++;
-                    if(compositeImgPixels[3*i+1] < 255)compositeImgPixels[3*i+1]++;
-                    if(compositeImgPixels[3*i+2] < 255)compositeImgPixels[3*i+2]++;
-
+            if(time_ < 0.31 || time_ >= 0.65){
+                compositeImgPixels[3*i] = sampleImgPixels[3*i]+r[i];
+                compositeImgPixels[3*i+1] = sampleImgPixels[3*i+1]+g[i];
+                compositeImgPixels[3*i+2] = sampleImgPixels[3*i+2]+b[i];
+            }else if (time_ >= 0.31 && time_ < 0.65){
+                
+                if(compositeImgPixels[3*i] < 255)compositeImgPixels[3*i]++;
+                if(compositeImgPixels[3*i+1] < 255)compositeImgPixels[3*i+1]++;
+                if(compositeImgPixels[3*i+2] < 255)compositeImgPixels[3*i+2]++;
+                
             }
             
         }
@@ -98,48 +98,88 @@ void TestLayer3::update(){
     
     //          ********************   INTERACTIVE METHOD   ********************
     
-    if(threshold == 225) flag_thr = true; else if(threshold == 0) flag_thr = false;
-    
-    
-    for (int n=0; n<nPixels; n++) {
-        if(r[n] == -45)flag_r = true; else if(r[n] == 255) flag_r = false;
-        if(g[n] == -40)flag_g = true; else if(g[n] == 255)flag_g = false;
-        if(b[n] == -35)flag_b = true; else if(b[n] == 255)flag_b = false;
-    }
-    
-    if(r_ == 0) flag_r_ = true; else if(r_ == 255)flag_r_ = false;
-    if(g_ == 0) flag_g_ = true; else if(g_ == 255)flag_g_ = false;
-    if(b_ == 0) flag_b_ = true; else if(b_ == 255)flag_b_ = false;
-    
-    
     if(state == "found"){
         
-        
-        if(flag_thr == true) threshold--; else if(flag_thr == false)threshold+=2;
-        
-        for (int n=0; n<nPixels; n++) {
-            if(flag_r == true)            r[n]++; else r[n]--;
-            if(flag_g == true)            g[n]++; else g[n]--;
-            if(flag_b == true)            b[n]++; else b[n]--;
+        if(flag_thr == false){
+            threshold--;
+            if (threshold <= 0) {flag_thr = true;}
+        }else{
+            threshold+=2;
+            if(threshold >= 255){flag_thr = false;}
         }
         
-        if(flag_r_ == true)            r_++; else r_--;
-        if(flag_g_ == true)            g_++; else g_--;
-        if(flag_b_ == true)            b_++; else b_--;
         
+        
+        for (int n=0; n<nPixels; n++) {
+            if(flag_r == false){
+                r[n]+=0.5;
+                if(r[n] >= 255){flag_r = true;}
+            }else{
+                r[n]-=0.5;
+                if(r[n] <= -45){flag_r = false;}
+            }
+            
+            
+            if(flag_g == false){
+                g[n]+=0.7;
+                if(g[n] >= 255){flag_g = true;}
+            }else{
+                g[n]-=0.7;
+                if(g[n] <= -40){flag_g = false;}
+            }
+            
+            
+            if(flag_b == false){
+                b[n]+=0.8;
+                if(b[n] >= 255){flag_b = true;}
+            }else{
+                b[n]-=0.8;
+                if(b[n] <= -30){flag_b = false;}
+            }
+        }
+        
+        
+        
+//        if(flag_r_ == false){
+//            r_++; if(r_ >=255){flag_r = true;}
+//        }else{
+//            r_--;
+//            if(r_ <= 0){flag_r_ = false;}
+//        }
+//        
+//        
+//        if(flag_g_ == false){
+//            g_++; if(g_ >=255){flag_g = true;}
+//        }else{
+//            g_--;
+//            if(g_ <= 0){flag_g_ = false;}
+//        }
+//        
+//        
+//        if(flag_b_ == false){
+//            b_++; if(b_ >=255){flag_b = true;}
+//        }else{
+//            b_--;
+//            if(b_ <= 0){flag_b_ = false;}
+//        }
         
         
     }else if (state == "notFound"){
+        
         if(threshold < 225) threshold++;
+        
+        
         
         for (int n=0; n<nPixels; n++) {
             if(r[n] > -45)r[n]-=0.8;
             if(g[n] > -40)g[n]-=0.8;
             if(b[n] > -35)b[n]-=0.8;
         }
-        if(r_ > 0)r_ -=0.8;
-        if(g_ > 0)g_ -=0.8;
-        if(b_ > 0)b_ -=0.8;
+        
+        
+//        if(r_ > 0)r_ -=0.8;
+//        if(g_ > 0)g_ -=0.8;
+//        if(b_ > 0)b_ -=0.8;
         
     }
     
@@ -151,12 +191,14 @@ void TestLayer3::update(){
 //--------------------------------------------------------------------------------------------------------------
 void TestLayer3::draw(){
     
-    ofTranslate(855, -40);
-    ofRotateZ(90);
+    ofTranslate(-70, 0);
     
     ofEnableAlphaBlending();
     ofBackground(0,0,0,0);
-    compositeImg.draw(0,0,ofGetHeight()*1.09,506.25);
+    compositeImg.draw(0,0,ofGetWidth()*1.1,ofGetHeight()*1.1);
+    
+    ofNoFill();
+    ofSetLineWidth(ofRandom(1,5));
     
     
     
@@ -164,10 +206,6 @@ void TestLayer3::draw(){
     
     int num = contourFinder.blobs.size();
     int centerX[num], centerY[num];
-    
-    unsigned char red;
-    unsigned char green;
-    unsigned char blue;
     
     for (int n=0; n<num; n++) {
         centerX[n] = contourFinder.blobs[n].boundingRect.x;
@@ -177,8 +215,6 @@ void TestLayer3::draw(){
         green = compositeImgPixels[ (centerY[n] * 960 + centerX[n]) *3 +1];
         blue = compositeImgPixels[ (centerY[n] * 960 + centerX[n]) *3 +2];
         
-        ofNoFill();
-        ofSetLineWidth(ofRandom(1,5));
         ofSetColor(red,green,blue);
         ofCircle(centerX[n],centerY[n],30*(red+green+blue)/765);
         ofCircle(centerX[n]+ofRandom(-5,5),centerY[n]+ofRandom(-5,5),30*(red+green+blue)/765);
