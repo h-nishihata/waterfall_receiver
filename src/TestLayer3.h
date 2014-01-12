@@ -30,26 +30,26 @@ public:
     ofxCvContourFinder contourFinder;
     
     bool bLearnBakground;
-    int threshold;
+    float threshold;
     float time_;
 
-    int nPixels  = 960*540;
+    int nPixels  = 640 * 360 ;
     unsigned char* compositeImgPixels = new unsigned char[nPixels*3];
     
-    float r[960*540];
-    float g[960*540];
-    float b[960*540];
+    float r[640*360];
+    float g[640*360];
+    float b[640*360];
 //    float r_;
 //    float g_;
 //    float b_;
     
-    bool flag_r;
-    bool flag_g;
-    bool flag_b;
-//    bool flag_r_;
-//    bool flag_g_;
-//    bool flag_b_;
-    bool flag_thr;
+    bool flag_r = false;
+    bool flag_g = false;
+    bool flag_b = false;
+//    bool flag_r_ = false;
+//    bool flag_g_ = false;
+//    bool flag_b_ = false;
+    bool flag_thr = false;
     
     unsigned char red;
     unsigned char green;

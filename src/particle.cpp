@@ -10,7 +10,7 @@ particle::particle(){
 //--------------------------------------------------------------
 void particle::update(){
     
-    int posx = ofRandom(-5,-20);
+    int posx = ofRandom(-1,-10);
     int posy = ofRandom(-3,3);
     x += posx;
     y += posy;

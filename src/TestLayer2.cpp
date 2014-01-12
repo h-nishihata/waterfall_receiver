@@ -15,7 +15,7 @@ void TestLayer2::draw(){
     
     ofEnableSmoothing();
     ofEnableAlphaBlending();
-    ofBackgroundGradient(ofColor(255,0,0,220),ofColor(255,255,0,190), OF_GRADIENT_LINEAR);
+    ofBackgroundGradient(ofColor(255,100,0,240),ofColor(255,255,100,200), OF_GRADIENT_LINEAR);
     
     
     int tempMax = p[0].x;
